@@ -70,11 +70,7 @@ class UserRepositoryGatewayTest {
     when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
     UserNotFoundException exception =
-        assertThrows(
-            UserNotFoundException.class,
-            () -> {
-              userRepositoryGateway.findById(1L);
-            });
+        assertThrows(UserNotFoundException.class, () -> userRepositoryGateway.findById(1L));
 
     assertEquals("User does not exist", exception.getMessage());
     verify(userRepository, times(1)).findById(1L);
@@ -109,11 +105,7 @@ class UserRepositoryGatewayTest {
     when(userRepository.findAll()).thenReturn(List.of());
 
     UserNotFoundException exception =
-        assertThrows(
-            UserNotFoundException.class,
-            () -> {
-              userRepositoryGateway.getUsers();
-            });
+        assertThrows(UserNotFoundException.class, () -> userRepositoryGateway.getUsers());
 
     assertEquals("There are no users", exception.getMessage());
     verify(userRepository, times(1)).findAll();
